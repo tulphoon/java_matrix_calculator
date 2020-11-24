@@ -12,8 +12,8 @@ import java.util.Scanner;
  * @author Dawid
  */
 public class View {
-    public void displayStartMatrixDimensionsInsertion(int number) {
-        System.out.println("Provide the dimensions for matrix number " + number);
+    public void println(String message) {
+        System.out.println(message);
     }
     
     /**

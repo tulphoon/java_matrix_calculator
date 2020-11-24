@@ -5,6 +5,8 @@
  */
 package pl.polsl.osuchowski.dawid.matrix_calculator_1;
 
+import java.util.Objects;
+import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.ArgParser;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.Matrix;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
 
@@ -14,31 +16,21 @@ import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
  */
 public class Main {
     public static void main(String[] args) {
-        int rows, columns;
         View view = new View();
-        view.displayStartMatrixDimensionsInsertion(1);
-        rows = view.readMatrixRowsFromUser();
-        columns = view.readMatrixColumnsFromUser();
+        ArgParser parser = new ArgParser(args);
         
-        Matrix m1 = new Matrix();
-        try {
-            m1.init(rows, columns);
-        } catch (Exception e) {
-            
+        if(!parser.parseArgs(view)) {
+            return;
+        }
+        
+        Matrix m1 = parser.getFirstMatrix(view);
+        Matrix m2 = parser.getSecondMatrix(view);
+        if(Objects.isNull(m1) || Objects.isNull(m2))
+        {
+            return;
         }
         
         
-        view.displayStartMatrixDimensionsInsertion(2);
-        rows = view.readMatrixRowsFromUser();
-        columns = view.readMatrixColumnsFromUser();
-        
-        Matrix m2 = new Matrix();
-        try {
-            m2.init(rows, columns);
-        }
-        catch (Exception e) {
-            
-        }
         
     }
 }
