@@ -12,10 +12,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
 
 /**
- *
+ * 
  * @author Dawid
  */
 public class ArgParser {
@@ -26,7 +25,7 @@ public class ArgParser {
         this.args = args;
     }
         
-    public boolean parseArgs(View view) {
+    public void parseArgs() throws ParseException {
         Options options = new Options();
         
         Option matrix1 = new Option("m1", "matrix1", true, "first matrix");
@@ -50,16 +49,13 @@ public class ArgParser {
         try {
             cmd = parser.parse(options, this.args);
             this.cmd = cmd;
-            return true;
         } catch (ParseException e) {
-            view.println(e.getMessage());
             formatter.printHelp("matrix-calculator", options);
+            throw e; 
         }
-        
-        return false;
     }
     
-    public Matrix getFirstMatrix(View view) {
+    public Matrix getFirstMatrix() throws NumberFormatException, IncorrectMatrixSizeException {
         String[] matrixSize1 = this.cmd.getOptionValues("matrix1");
         
         int rows, columns;
@@ -71,16 +67,12 @@ public class ArgParser {
             columns = Integer.parseInt(matrixSize1[1]);
             m1.init(rows, columns);
             return m1;
-        } catch (NumberFormatException nfe) {
-            view.println(nfe.getMessage() + " conversion to integer failed.");
-        } catch (Exception e) {
-            view.println(e.getMessage());
+        } catch (NumberFormatException | IncorrectMatrixSizeException e) {
+            throw e;
         }
-        
-        return null;
     }
     
-        public Matrix getSecondMatrix(View view) {
+        public Matrix getSecondMatrix() throws NumberFormatException, IncorrectMatrixSizeException{
         String[] matrixSize2 = this.cmd.getOptionValues("matrix2");
         
         int rows, columns;
@@ -92,12 +84,8 @@ public class ArgParser {
             columns = Integer.parseInt(matrixSize2[1]);
             m2.init(rows, columns);
             return m2;
-        } catch (NumberFormatException nfe) {
-            view.println(nfe.getMessage() + " conversion to integer failed.");
-        } catch (Exception e) {
-            view.println(e.getMessage());
+        } catch (NumberFormatException | IncorrectMatrixSizeException e) {
+            throw e;
         }
-        
-        return null;
     }  
 }

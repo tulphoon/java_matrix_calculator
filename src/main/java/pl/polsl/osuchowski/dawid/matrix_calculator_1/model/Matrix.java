@@ -19,12 +19,16 @@ public class Matrix {
 
     public void init(int rows, int columns) throws IncorrectMatrixSizeException {
         if(rows < 1 || rows > 10) {
-            throw new IncorrectMatrixSizeException("Rows value out of bounds.");
+            throw new IncorrectMatrixSizeException("Rows value " + rows + " is out of bounds.");
         } else if (columns < 1 || columns > 10) {
-            throw new IncorrectMatrixSizeException("Columns value out of bounds.");
+            throw new IncorrectMatrixSizeException("Columns value " + columns + "is out of bounds.");
         }
         this.rows = rows;
         this.columns = columns;
+    }
+    
+    public void fillMatrix(ArrayList<ArrayList<Integer>> values) {
+        this.data = values;
     }
 
     public int getRows() {
@@ -34,30 +38,8 @@ public class Matrix {
     public int getColumns() {
         return columns;
     }
-    
-}
 
-/**
- * Exception class for objects thrown when attempting to create a matrix with
- * incorrect size.
- *
- * @author Dawid Osuchowski
- * @version 1.0
- */
-class IncorrectMatrixSizeException extends Exception {
-
-    /**
-     * Non-parameter constructor
-     */
-    public IncorrectMatrixSizeException() {
-    }
-
-    /**
-     * Exception class constructor
-     *
-     * @param message display message
-     */
-    public IncorrectMatrixSizeException(String message) {
-        super(message);
+    public ArrayList<ArrayList<Integer>> getData() {
+        return data;
     }
 }

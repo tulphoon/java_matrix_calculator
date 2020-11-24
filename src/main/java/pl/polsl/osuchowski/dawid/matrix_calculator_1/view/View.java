@@ -5,6 +5,9 @@
  */
 package pl.polsl.osuchowski.dawid.matrix_calculator_1.view;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -20,19 +23,47 @@ public class View {
      * 
      * @return 
      */
-    public int readMatrixRowsFromUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number of rows: ");
-        int rows = scanner.nextInt();
-          
-        return rows;
+    private int readMatrixValue(int row, int column) {
+        while(true)
+        {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Matrix cell [" + row + "," + column + "] value: ");
+                int value = scanner.nextInt();
+                return value;
+            } catch (InputMismatchException ime) {
+                System.err.println("Not a valid value. Error: " + ime.getMessage());
+            }
+        }
     }
     
-    public int readMatrixColumnsFromUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number of columns: ");
-        int columns = scanner.nextInt();
-        
-        return columns;
+    public ArrayList<ArrayList<Integer>> getMatrixValues(int rows, int columns) {
+        ArrayList<ArrayList<Integer>> data = new ArrayList<>();
+        for(int i = 0; i < rows; i++) {
+            data.add(new ArrayList<Integer>());
+            for(int j = 0; j < columns; j++) {
+                data.get(i).add(j, readMatrixValue(i, j));
+            }
+        }
+        return data;
+    }
+    
+    public void printMatrix(ArrayList<ArrayList<Integer>> matrix) {
+        System.out.println("-------------------------");
+        for(ArrayList<Integer> column : matrix)
+        {
+            System.out.print("[");
+            Iterator<Integer> iterator = column.iterator();
+            while(iterator.hasNext())
+            {
+                int value = iterator.next();
+                if(!iterator.hasNext())
+                    System.out.print(value);
+                else
+                    System.out.print(value + ", ");
+            }
+            System.out.println("]");
+        }
+        System.out.println("-------------------------");
     }
 }
