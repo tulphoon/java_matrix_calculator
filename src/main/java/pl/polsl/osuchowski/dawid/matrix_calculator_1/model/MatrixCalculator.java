@@ -14,9 +14,7 @@ public class MatrixCalculator {
         
         
         
-        
-        
-        
-        return new Matrix(a.getRows(), a.getColumns());
+
+            return new Matrix();
     }
 }

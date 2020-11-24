@@ -20,13 +20,25 @@ public class Main {
         rows = view.readMatrixRowsFromUser();
         columns = view.readMatrixColumnsFromUser();
         
-        Matrix m1 = new Matrix(rows, columns);
+        Matrix m1 = new Matrix();
+        try {
+            m1.init(rows, columns);
+        } catch (Exception e) {
+            
+        }
+        
         
         view.displayStartMatrixDimensionsInsertion(2);
         rows = view.readMatrixRowsFromUser();
         columns = view.readMatrixColumnsFromUser();
         
-        Matrix m2 = new Matrix(rows, columns);
+        Matrix m2 = new Matrix();
+        try {
+            m2.init(rows, columns);
+        }
+        catch (Exception e) {
+            
+        }
         
     }
 }
