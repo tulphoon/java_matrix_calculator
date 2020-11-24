@@ -66,4 +66,29 @@ public class View {
         }
         System.out.println("-------------------------");
     }
+    
+    public int pickOperation() {
+        while(true)
+        {
+            System.out.println("-------------------------");
+            System.out.println("Available operations:");
+            System.out.println("1 - Addition");
+            System.out.println("2 - Subtraction");
+            System.out.println("3 - Multiplication");
+            System.out.println("-------------------------");
+            System.out.println("11 - Refill matrix 1");
+            System.out.println("12 - Refill matrix 2");
+            System.out.println("-------------------------");
+            System.out.println("0 - Exit");
+            System.out.println("-------------------------");
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Select operation to perform: ");
+                int value = scanner.nextInt();
+                return value;
+            } catch (InputMismatchException ime) {
+                System.err.println("Not a valid value. Error: " + ime.getMessage());
+            }
+        }
+    }
 }

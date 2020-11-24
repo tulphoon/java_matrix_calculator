@@ -48,21 +48,47 @@ public class Main {
             return;
         }
         
+        view.println("Filling Matrix 1");
         m1.fillMatrix(view.getMatrixValues(m1.getRows(), m1.getColumns()));
+        view.println("Filling Matrix 2");
         m2.fillMatrix(view.getMatrixValues(m2.getRows(), m2.getColumns()));
         
+        view.println("Matrix 1");
         view.printMatrix(m1.getData());
+        view.println("Matrix 2");
         view.printMatrix(m2.getData());
         
         MatrixCalculator calc = new MatrixCalculator();
         
-        try {
-            view.printMatrix(calc.addMatrices(m1, m2));
-            view.printMatrix(calc.subMatrices(m1, m2));
-            view.printMatrix(calc.mulMatrices(m1, m2));
-        } catch (MatrixDimensionsMismatchException exp) {
-            view.println(exp.getMessage());
-            return;
+        while(true) {
+            int operation = view.pickOperation();
+            try {
+                switch(operation) {
+                    case 1:
+                        view.printMatrix(calc.addMatrices(m1, m2));
+                        break;
+                    case 2:
+                        view.printMatrix(calc.subMatrices(m1, m2));
+                        break;
+                    case 3:
+                        view.printMatrix(calc.mulMatrices(m1, m2));
+                        break;
+                    case 11:
+                        view.println("Filling Matrix 1");
+                        m1.fillMatrix(view.getMatrixValues(m1.getRows(), m1.getColumns()));
+                        break;
+                    case 12:
+                        view.println("Filling Matrix 2");
+                        m2.fillMatrix(view.getMatrixValues(m2.getRows(), m2.getColumns()));
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        break;
+                }
+            } catch (MatrixDimensionsMismatchException exp) {
+                view.println(exp.getMessage());
+            }
         }
     }
 }
