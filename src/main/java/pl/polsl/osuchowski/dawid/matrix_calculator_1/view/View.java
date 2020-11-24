@@ -40,7 +40,7 @@ public class View {
     public ArrayList<ArrayList<Integer>> getMatrixValues(int rows, int columns) {
         ArrayList<ArrayList<Integer>> data = new ArrayList<>();
         for(int i = 0; i < rows; i++) {
-            data.add(new ArrayList<Integer>());
+            data.add(new ArrayList<>());
             for(int j = 0; j < columns; j++) {
                 data.get(i).add(j, readMatrixValue(i, j));
             }

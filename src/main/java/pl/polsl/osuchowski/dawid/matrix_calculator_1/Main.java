@@ -10,6 +10,8 @@ import org.apache.commons.cli.ParseException;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.ArgParser;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.IncorrectMatrixSizeException;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.Matrix;
+import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.MatrixDimensionsMismatchException;
+import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.MatrixCalculator;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
 
 /**
@@ -51,5 +53,16 @@ public class Main {
         
         view.printMatrix(m1.getData());
         view.printMatrix(m2.getData());
+        
+        MatrixCalculator calc = new MatrixCalculator();
+        
+        try {
+            view.printMatrix(calc.addMatrices(m1, m2));
+            view.printMatrix(calc.subMatrices(m1, m2));
+            view.printMatrix(calc.mulMatrices(m1, m2));
+        } catch (MatrixDimensionsMismatchException exp) {
+            view.println(exp.getMessage());
+            return;
+        }
     }
 }
