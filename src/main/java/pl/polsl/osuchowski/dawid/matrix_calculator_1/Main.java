@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.polsl.osuchowski.dawid.matrix_calculator_1;
 
 import java.util.Objects;
@@ -15,8 +10,9 @@ import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.MatrixCalculator;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
 
 /**
- *
+ * Main class of the Matrix Calculator application, acts as the Controller.
  * @author Dawid
+ * @version 1.0
  */
 public class Main {
     public static void main(String[] args) {

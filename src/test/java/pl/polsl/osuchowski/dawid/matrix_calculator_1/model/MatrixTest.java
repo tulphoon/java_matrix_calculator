@@ -52,7 +52,7 @@ public class MatrixTest {
             matrix.init(rows, columns);
         });
         
-        String expectedMessage = "value out of bounds.";
+        String expectedMessage = "is out of bounds.";
         String actualMessage = exception.getMessage();
         
         assertTrue(actualMessage.contains(expectedMessage));
@@ -69,7 +69,7 @@ public class MatrixTest {
             matrix.init(rows, columns);
         });
         
-        String expectedMessage = "Rows value out of bounds.";
+        String expectedMessage = "Rows value " + rows + " is out of bounds.";
         String actualMessage = exception.getMessage();
         
         assertTrue(actualMessage.contains(expectedMessage));
@@ -86,7 +86,7 @@ public class MatrixTest {
             matrix.init(rows, columns);
         });
         
-        String expectedMessage = "Columns value out of bounds.";
+        String expectedMessage = "Columns value " + columns + "is out of bounds.";
         String actualMessage = exception.getMessage();
         
         assertTrue(actualMessage.contains(expectedMessage));
