@@ -8,12 +8,14 @@ package pl.polsl.osuchowski.dawid.matrix_calculator_1.view;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
  * Provides functions for printing to the console and reading input
  * @author Dawid
- * @version 1.0
+ * @version 1.1
  */
 public class View {
     /**
@@ -50,14 +52,14 @@ public class View {
      * @param columns number of columns in the matrix
      * @return matrix containing the inserted values
      */
-    public ArrayList<ArrayList<Integer>> getMatrixValues(int rows, int columns) {
-        ArrayList<ArrayList<Integer>> data = new ArrayList<>();
-        for(int i = 0; i < rows; i++) {
+    public List<List<Integer>> getMatrixValues(int rows, int columns) {
+        List<List<Integer>> data = new ArrayList<>();
+        IntStream.range(0, rows).forEachOrdered(i -> {
             data.add(new ArrayList<>());
-            for(int j = 0; j < columns; j++) {
-                data.get(i).add(j, readMatrixValue(i, j));
-            }
-        }
+            IntStream.range(0, columns).forEachOrdered(j -> {
+               data.get(i).add(j, readMatrixValue(i, j)); 
+            });
+        });
         return data;
     }
     
@@ -65,9 +67,9 @@ public class View {
      * Used for printing the matrix
      * @param matrix matrix to be printed
      */
-    public void printMatrix(ArrayList<ArrayList<Integer>> matrix) {
+    public void printMatrix(List<List<Integer>> matrix) {
         System.out.println("-------------------------");
-        for(ArrayList<Integer> column : matrix)
+        for(List<Integer> column : matrix)
         {
             System.out.print("[");
             Iterator<Integer> iterator = column.iterator();

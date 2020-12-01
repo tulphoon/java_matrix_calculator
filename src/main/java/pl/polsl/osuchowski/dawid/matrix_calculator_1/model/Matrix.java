@@ -6,11 +6,12 @@
 package pl.polsl.osuchowski.dawid.matrix_calculator_1.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Defines a two dimensional Matrix
  * @author Dawid
- * @version 1.0
+ * @version 1.1
  */
 public class Matrix {
     /**
@@ -25,7 +26,7 @@ public class Matrix {
     /**
      * Two dimensional array containing the values
      */
-    private ArrayList<ArrayList<Integer>> data = new ArrayList<>();
+    private List<List<Integer>> data = new ArrayList<>();
 
     /**
      * Used for initializing the Matrix (setting it's size)
@@ -37,7 +38,7 @@ public class Matrix {
         if(rows < 1 || rows > 10) {
             throw new IncorrectMatrixSizeException("Rows value " + rows + " is out of bounds.");
         } else if (columns < 1 || columns > 10) {
-            throw new IncorrectMatrixSizeException("Columns value " + columns + "is out of bounds.");
+            throw new IncorrectMatrixSizeException("Columns value " + columns + " is out of bounds.");
         }
         this.rows = rows;
         this.columns = columns;
@@ -47,7 +48,7 @@ public class Matrix {
      * Fills the matrix with values
      * @param values array containing the values to be assigned to the matrix
      */
-    public void fillMatrix(ArrayList<ArrayList<Integer>> values) {
+    public void fillMatrix(List<List<Integer>> values) {
         this.data = values;
     }
 
@@ -59,7 +60,7 @@ public class Matrix {
         return columns;
     }
 
-    public ArrayList<ArrayList<Integer>> getData() {
+    public List<List<Integer>> getData() {
         return data;
     }
 }

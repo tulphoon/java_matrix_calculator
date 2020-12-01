@@ -1,46 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.polsl.osuchowski.dawid.matrix_calculator_1.model;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
 /**
- *
+ * Tests for the Matrix class
  * @author Dawid
+ * @version 1.0
  */
 public class MatrixTest {
     
     private Matrix matrix;
-    
-    public MatrixTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+        
     @BeforeEach
     public void setUp() {
         matrix = new Matrix();
     }
     
-    @AfterEach
-    public void tearDown() {
+    /**
+     * Checks if created matrix throws exception with incorrect size
+     * @param rows number of rows
+     * @param columns number of columns
+     */
+    @ParameterizedTest
+    @CsvSource({
+        "1, 1",
+        "1, 2",
+        "2, 1",
+        "10, 10"
+    })
+    public void testCorrectMatrixSize(int rows, int columns) {
+        try {
+            matrix.init(rows, columns);
+            assertEquals(matrix.getRows(), rows);
+            assertEquals(matrix.getColumns(), columns);
+        } catch (Exception e) {
+            fail("Something went wrong.");
+        }
     }
     
+    /**
+     * Checks if created matrix throws exception with incorrect size
+     * @param rows number of rows
+     * @param columns number of columns
+     */
     @ParameterizedTest
     @CsvSource({
         "0, 0",
@@ -58,6 +63,11 @@ public class MatrixTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
     
+    /**
+     * Checks if created matrix throws exception with incorrect number of rows
+     * @param rows number of rows
+     * @param columns number of columns
+     */
     @ParameterizedTest
     @CsvSource({
         "0, 1",
@@ -75,6 +85,11 @@ public class MatrixTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
     
+    /**
+     * Checks if created matrix throws exception with incorrect number of columns
+     * @param rows number of rows
+     * @param columns number of columns
+     */
     @ParameterizedTest
     @CsvSource({
         "1, 0",
@@ -86,7 +101,7 @@ public class MatrixTest {
             matrix.init(rows, columns);
         });
         
-        String expectedMessage = "Columns value " + columns + "is out of bounds.";
+        String expectedMessage = "Columns value " + columns + " is out of bounds.";
         String actualMessage = exception.getMessage();
         
         assertTrue(actualMessage.contains(expectedMessage));

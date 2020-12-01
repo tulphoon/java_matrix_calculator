@@ -3,6 +3,8 @@ package pl.polsl.osuchowski.dawid.matrix_calculator_1;
 import java.util.Objects;
 import org.apache.commons.cli.ParseException;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.ArgParser;
+import static pl.polsl.osuchowski.dawid.matrix_calculator_1.model.ArgParser.MatrixOrder.FIRSTMATRIX;
+import static pl.polsl.osuchowski.dawid.matrix_calculator_1.model.ArgParser.MatrixOrder.SECONDMATRIX;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.IncorrectMatrixSizeException;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.Matrix;
 import pl.polsl.osuchowski.dawid.matrix_calculator_1.model.MatrixDimensionsMismatchException;
@@ -12,9 +14,13 @@ import pl.polsl.osuchowski.dawid.matrix_calculator_1.view.View;
 /**
  * Main class of the Matrix Calculator application, acts as the Controller.
  * @author Dawid
- * @version 1.0
+ * @version 1.1
  */
 public class Main {
+    /**
+     * Runs the main method, containing the Matrix Calculator program
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         View view = new View();
         ArgParser parser = new ArgParser(args);
@@ -29,8 +35,8 @@ public class Main {
         Matrix m1, m2;
         
         try {
-            m1 = parser.getFirstMatrix();
-            m2 = parser.getSecondMatrix();
+            m1 = parser.getMatrix(FIRSTMATRIX);
+            m2 = parser.getMatrix(SECONDMATRIX);
         } catch (NumberFormatException nfe) {
             view.println(nfe.getMessage() + " conversion to integer failed.");
             return;
